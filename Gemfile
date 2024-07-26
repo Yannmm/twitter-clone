@@ -8,6 +8,8 @@ gem 'bootsnap', require: false
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem 'cssbundling-rails'
 
+gem 'devise', '~> 4.9'
+
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
 
@@ -60,13 +62,15 @@ group :development, :test do
   gem 'pry-rails'
 
   gem 'rspec-rails'
+end
+
+group :development do
+  gem 'htmlbeautifier'
 
   gem 'rubocop'
 
   gem 'ruby-lsp'
-end
 
-group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
 

@@ -1,1 +1,7 @@
-<h1>hello world!!</h1>
+<% if user_signed_in? %>
+  <%= link_to 'Sign out', destroy_user_session_path %>
+<% else %>
+  <h1>Hello world!!!</h1>
+  <%= link_to 'Sign up', new_user_registration_path, class: "btn btn-primary" %>
+  <%= link_to 'Log in', new_user_session_path, class: "btn btn-outline-primary" %>
+<% end %>
