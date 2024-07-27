@@ -8,4 +8,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'home#index'
+
+  get 'test' => 'tweets#test'
+
+  resources :tweets, only: :create
 end

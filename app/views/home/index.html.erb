@@ -1,5 +1,18 @@
+<% if flash[:error] %>
+  <%= flash[:error] %>
+<% end %>
 <% if user_signed_in? %>
-  <%= link_to 'Sign out', destroy_user_session_path %>
+  <%= link_to 'Sign out', destroy_user_session_path, class: "btn btn-warning", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+  <h1>You are logged in!</h1>
+  <%= form_with model: Tweet.new, url: tweets_path, local: true do |f| %>
+    <%= f.text_field :body %>
+    <%= f.submit %>
+  <% end %>
+  <ul>
+    <% Tweet.find_each do |tweet| %>
+      <li><%= tweet.body %></li>
+    <% end %>
+  </ul>
 <% else %>
   <h1>Hello world!!!</h1>
   <%= link_to 'Sign up', new_user_registration_path, class: "btn btn-primary" %>
