@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   get 'dashboard' => 'dashboard#index'
 
   resources :tweets, only: :create
+
+  resources :usernames, only: %i[new update]
 end
