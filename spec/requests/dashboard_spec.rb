@@ -16,6 +16,13 @@ RSpec.describe 'Dashboard', type: :request do
         get dashboard_path
         expect(response).to have_http_status(:success)
       end
+
+      it 'is redirected' do
+        user = create(:user, username: nil)
+        sign_in user
+        get dashboard_path
+        expect(response).to redirect_to(new_username_path)
+      end
     end
   end
 end
