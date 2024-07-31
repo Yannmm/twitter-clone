@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_username_form
-    redirect_to new_username_path
+    redirect_to edit_username_path(current_user)
   end
 end

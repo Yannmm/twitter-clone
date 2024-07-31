@@ -13,5 +13,5 @@ Rails.application.routes.draw do
 
   resources :tweets, only: :create
 
-  resources :usernames, only: %i[new update]
+  resources :usernames, only: %i[edit update]
 end

@@ -1,6 +1,6 @@
 <div class="container py-5" style="max-width: 540px">
   <h2>Set username</h2>
-  <%= form_with model: current_user, local: true, url: new_username_path do |f| %>
+  <%= form_with model: current_user, local: false, url: username_path do |f| %>
     <%= f.label :username, class: 'form-label' %>
     <%= f.text_field :username, class: 'form-control' %>
     <div class="mt-3">

@@ -8,7 +8,7 @@ RSpec.describe 'Usernames', type: :request do
   describe 'GET /usernames/new' do
     context 'username is not set yet' do
       it 'is successful' do
-        get new_username_path
+        get edit_username_path(user)
         expect(response).to have_http_status(:success)
       end
     end
