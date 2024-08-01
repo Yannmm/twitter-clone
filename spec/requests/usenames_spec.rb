@@ -15,30 +15,30 @@ RSpec.describe 'Usernames', type: :request do
   end
 
   describe 'PUT /username_path' do
-    it 'updates the username then is redirected to dashboard' do
-      expect do
-        put username_path(user), params: {
-          user: {
-            username: 'Abc Haha'
+    context 'valid params' do
+      it 'updates the username then is redirected to dashboard' do
+        expect do
+          put username_path(user), params: {
+            user: {
+              username: 'Abc Haha'
+            }
           }
-        }
-      end.to change { user.reload.username }.from(nil).to('Abc Haha')
-      expect(response).to redirect_to(dashboard_path)
+        end.to change { user.reload.username }.from(nil).to('Abc Haha')
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    context 'invalid params' do
+      it 'updates the username then is redirected to dashboard' do
+        expect do
+          put username_path(user), params: {
+            user: {
+              username: ''
+            }
+          }
+        end.not_to(change { user.reload.username })
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
     end
   end
-
-  # context 'user is signed in' do
-  #   it 'is redirected ' do
-  #     user = create(:user)
-  #     sign_in user
-  #     expect do
-  #       post tweets_path, params: {
-  #         tweet: {
-  #           body: 'New tweet body'
-  #         }
-  #       }
-  #     end.to change { Tweet.count }.by(1)
-  #     expect(response).to redirect_to(dashboard_path)
-  #   end
-  # end
 end
