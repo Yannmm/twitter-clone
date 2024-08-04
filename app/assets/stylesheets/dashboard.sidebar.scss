@@ -1,0 +1,15 @@
+aside.dashboard-sidebar {
+  a {
+    text-decoration: none;
+    color: black;
+    div {
+      -moz-animation: all .1s ease-in;
+      -o-animation: all .1s ease-in;
+      -webkit-animation: all .1s ease-in;
+      transition: all .1s ease-in;
+      &:hover {
+        background-color: $gray-400; 
+      }
+    }
+  }
+}
