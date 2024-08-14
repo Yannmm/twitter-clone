@@ -48,10 +48,27 @@
   <% end %>
   <div>
     <%= link_to '#', class: "d-flex align-items-center mb-3 px-4 py-2" do %>
-      <button type="button" class="btn rounded-pill btn-lg w-100 btn-twitter">Tweet</button>
+      <button type="button" class="btn rounded-pill btn-lg w-100 btn-twitter" data-bs-toggle="modal" data-bs-target="#exampleModal">Tweet</button>
     <% end %>
   </div>
   <div class="d-flex align-items-center mb-3 px-4 py-2">
     <%= link_to 'Sign out', destroy_user_session_path, class: "btn rounded-pill btn-lg w-100 btn-warning", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
   </div>
 </aside>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'shared/tweet_form' %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
