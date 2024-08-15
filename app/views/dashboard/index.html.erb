@@ -2,7 +2,9 @@
   <div class="mb-4">
     <%= link_to 'Home', dashboard_path, class: 'fs-4 text-decoration-none text-black' %>
   </div>
-  <%= render 'shared/tweet_form' %>
+  <div class="mb-4">
+    <%= render 'shared/tweet_form' %>
+  </div>
   <%= render Tweet.order(created_at: :desc) %>
 </div>
 <div class="col">
