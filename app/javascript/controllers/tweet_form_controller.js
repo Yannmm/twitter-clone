@@ -7,9 +7,9 @@ export default class extends Controller {
   connect() {
     var textArea = this.textAreaTarget;
     const form = this.element;
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-      form.submit();
+    form.addEventListener('turbo:submit-end', function(event) {
+      // event.preventDefault();
+      // form.submit();
       textArea.value = "";
   });
   }
