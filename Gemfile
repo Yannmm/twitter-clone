@@ -83,4 +83,5 @@ end
 
 group :test do
   gem 'shoulda-matchers', '~> 6.0'
+  gem "timecop", "~> 0.9.10"
 end

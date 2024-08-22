@@ -2,9 +2,11 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @tweet = current_user.tweets.build(tweet_params)
+    tweet = current_user.tweets.build(tweet_params)
 
-    if @tweet.save
+    @tweet_presenter = TweetPresenter.new(tweet)
+
+    if tweet.save
       respond_to do |format|
         format.html do
           redirect_to dashboard_path, notice: 'Tweet created successfully'
