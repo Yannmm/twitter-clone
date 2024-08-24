@@ -19,13 +19,18 @@
           <%= image_tag 'retweet.png', width: 20 %>
           <span class="ms-1">Retweets</span>
         <% end %>
-        <%= link_to "#", class: "text-decoration-none text-black action-link likes" do %>
-          <%= image_tag 'like.png', width: 20 %>
-          <span class="ms-1">Likes</span>
+        <%= link_to (tweet_presenter.liked? ?  tweet_like_path(tweet_presenter.tweet, tweet_presenter.like) : tweet_likes_path(tweet_presenter.tweet)), data: { turbo_method: (tweet_presenter.liked? ? :delete : :post) }, class: "text-decoration-none text-black action-link likes" do %>
+          <% if tweet_presenter.liked? %>
+            <%= image_tag 'like_fill.png', width: 20 %>
+            <span class="ms-1"><%= tweet_presenter.likes.size %></span>
+          <% else %>
+            <%= image_tag 'like.png', width: 20 %>
+            <span class="ms-1"><%= tweet_presenter.likes.size %></span>
+          <% end %>
         <% end %>
         <%= link_to "#", class: "text-decoration-none text-black action-link share" do %>
           <%= image_tag 'share.png', width: 20 %>
-          <span class="ms-1">Share</span>
+          <span class="ms-1">Bookmark</span>
         <% end %>
       </div>
     </div>

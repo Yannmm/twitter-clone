@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 
   get 'dashboard' => 'dashboard#index'
 
-  resources :tweets, only: :create
+  resources :tweets, only: :create do
+    resources :likes, only: %i[create destroy]
+  end
 
   resources :usernames, only: %i[edit update]
 end

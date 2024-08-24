@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
   def create
     tweet = current_user.tweets.build(tweet_params)
 
-    @tweet_presenter = TweetPresenter.new(tweet)
+    @tweet_presenter = TweetPresenter.new(tweet, current_user)
 
     if tweet.save
       respond_to do |format|
