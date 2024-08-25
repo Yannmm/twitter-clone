@@ -1,4 +1,5 @@
 class TweetPresenter
+  include Rails.application.routes.url_helpers
   include ActionView::Helpers::DateHelper
   def initialize(tweet, current_user)
     @tweet = tweet
@@ -7,9 +8,9 @@ class TweetPresenter
 
   attr_reader :tweet
 
-  delegate :user, :body, :likes, :liking_users, to: :tweet
+  delegate :likes_count, :user, :body, :likes, to: :tweet
 
-  delegate :avatar, :display_name, :username, to: :user
+  delegate :display_name, :username, to: :user
 
   def created_at
     if (Time.zone.now - tweet.created_at) > 1.day
@@ -20,10 +21,42 @@ class TweetPresenter
   end
 
   def liked?
-    tweet.liking_users.include?(@current_user)
+    @liked ||= tweet.liking_users.include?(@current_user)
   end
 
   def like
-    tweet.likes.find_by(user: @current_user)
+    @like ||= tweet.likes.find_by(user: @current_user)
+  end
+
+  def avatar
+    if tweet.user.avatar.attached?
+      tweet.user.avatar
+    else
+      'anonymous.png'
+    end
+  end
+
+  def like_path
+    if liked?
+      tweet_like_path(tweet, like)
+    else
+      tweet_likes_path(tweet)
+    end
+  end
+
+  def like_method
+    if liked?
+      :delete
+    else
+      :post
+    end
+  end
+
+  def like_image
+    if liked?
+      'like_fill.png'
+    else
+      'like.png'
+    end
   end
 end
