@@ -20,20 +20,20 @@ class TweetPresenter
     end
   end
 
-  def liked?
-    @liked ||= tweet.liking_users.include?(@current_user)
-  end
-
-  def like
-    @like ||= tweet.likes.find_by(user: @current_user)
-  end
-
   def avatar
     if tweet.user.avatar.attached?
       tweet.user.avatar
     else
       'anonymous.png'
     end
+  end
+
+  def liked?
+    @liked ||= tweet.liking_users.include?(@current_user)
+  end
+
+  def like
+    @like ||= tweet.likes.find_by(user: @current_user)
   end
 
   def like_path
@@ -57,6 +57,46 @@ class TweetPresenter
       'like_fill.png'
     else
       'like.png'
+    end
+  end
+
+  def bookmarked?
+    @bookmarked ||= tweet.bookmarking_users.include?(@current_user)
+  end
+
+  def bookmark
+    @bookmark ||= tweet.bookmarks.find_by(user: @current_user)
+  end
+
+  def bookmark_path
+    if bookmarked?
+      tweet_bookmark_path(tweet, bookmark)
+    else
+      tweet_bookmarks_path(tweet)
+    end
+  end
+
+  def bookmark_method
+    if bookmarked?
+      :delete
+    else
+      :post
+    end
+  end
+
+  def bookmark_image
+    if bookmarked?
+      'bookmark_fill.png'
+    else
+      'bookmark.png'
+    end
+  end
+
+  def bookmark_text
+    if bookmarked?
+      'Bookmarked'
+    else
+      'Bookmark'
     end
   end
 end

@@ -12,6 +12,10 @@ class User < ApplicationRecord
 
   has_many :liked_tweets, through: :likes, source: :tweet
 
+  has_many :bookmarks, dependent: :destroy
+
+  has_many :bookmarked_tweets, through: :bookmarks, source: :tweet
+
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
 
   before_save :set_display_name, if: -> { username.present? && display_name.blank? }
