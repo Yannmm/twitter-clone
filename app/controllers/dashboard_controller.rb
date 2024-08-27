@@ -6,7 +6,9 @@ class DashboardController < ApplicationController
                                        :likes,
                                        :liking_users,
                                        :bookmarks,
-                                       :bookmarking_users)
+                                       :bookmarking_users,
+                                       :retweets,
+                                       :retweeting_users)
                              .order(created_at: :desc).map do |tweet|
       TweetPresenter.new(tweet, current_user)
     end

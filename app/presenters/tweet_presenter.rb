@@ -60,6 +60,14 @@ class TweetPresenter
     end
   end
 
+  def like_text
+    if tweet.likes_count.positive?
+      tweet.likes_count.to_s
+    else
+      'Like'
+    end
+  end
+
   def bookmarked?
     @bookmarked ||= tweet.bookmarking_users.include?(@current_user)
   end
@@ -97,6 +105,50 @@ class TweetPresenter
       'Bookmarked'
     else
       'Bookmark'
+    end
+  end
+
+  def self_tweet?
+    tweet.user == @current_user
+  end
+
+  def retweeted?
+    @retweeted ||= tweet.retweeting_users.include?(@current_user)
+  end
+
+  def retweet
+    @retweet ||= tweet.retweets.find_by(user: @current_user)
+  end
+
+  def retweet_path
+    if retweeted?
+      tweet_retweet_path(tweet, retweet)
+    else
+      tweet_retweets_path(tweet)
+    end
+  end
+
+  def retweet_method
+    if retweeted?
+      :delete
+    else
+      :post
+    end
+  end
+
+  def retweet_image
+    if retweeted?
+      'retweet_fill.png'
+    else
+      'retweet.png'
+    end
+  end
+
+  def retweet_text
+    if tweet.retweets_count.positive?
+      tweet.retweets_count.to_s
+    else
+      'Retweet'
     end
   end
 end

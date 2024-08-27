@@ -10,4 +10,8 @@ class Tweet < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
 
   has_many :bookmarking_users, through: :bookmarks, source: :user
+
+  has_many :retweets, dependent: :destroy
+
+  has_many :retweeting_users, through: :retweets, source: :user
 end
