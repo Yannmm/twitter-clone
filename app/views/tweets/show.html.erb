@@ -1,6 +1,12 @@
 <%= turbo_page_requires_reload %>
 <div class="col-7">
   <h1>Hello <%= @tweet.body %></h1>
+  <div class="mb-3">
+    <%= link_to :back, class: "fs-4 text-decoration-none text-black fw-semibold" do %>
+      <%= image_tag "back.png", size: 30, class: "me-4" %>
+      <span style="position: relative; top:2px;">Tweet</span>
+    <% end %>
+  </div>
 </div>
 <div class="col">
   123
