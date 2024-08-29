@@ -8,7 +8,7 @@ class TweetPresenter
 
   attr_reader :tweet
 
-  delegate :likes_count, :user, :body, :likes, to: :tweet
+  delegate :likes_count, :retweets_count, :user, :body, :likes, to: :tweet
 
   delegate :display_name, :username, to: :user
 

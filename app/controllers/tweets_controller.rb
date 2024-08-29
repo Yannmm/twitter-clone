@@ -20,8 +20,8 @@ class TweetsController < ApplicationController
   end
 
   def show
-    @tweet = Tweet.find(params[:id])
-    render 'show'
+    tweet = Tweet.find(params[:id])
+    @tweet_presenter = TweetPresenter.new(tweet, current_user)
   end
 
   private
