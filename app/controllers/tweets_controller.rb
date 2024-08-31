@@ -22,11 +22,21 @@ class TweetsController < ApplicationController
   def show
     tweet = Tweet.find(params[:id])
     @tweet_presenter = TweetPresenter.new(tweet, current_user)
+    log_view
   end
 
   private
 
   def tweet_params
     params.require(:tweet).permit(:body)
+  end
+
+  def log_view
+    return if View.exists?(tweet: @tweet_presenter.tweet, user: current_user)
+
+    view = current_user.views.build(tweet: @tweet_presenter.tweet)
+    view.save!
+  rescue ActiveRecord::RecordNotUnique => _e
+    # Handle the exception here
   end
 end

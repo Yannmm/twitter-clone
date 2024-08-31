@@ -13,6 +13,8 @@ gem 'devise', '~> 4.9'
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
 
+gem 'impressionist'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
@@ -83,5 +85,5 @@ end
 
 group :test do
   gem 'shoulda-matchers', '~> 6.0'
-  gem "timecop", "~> 0.9.10"
+  gem 'timecop', '~> 0.9.10'
 end

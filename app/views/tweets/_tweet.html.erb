@@ -7,9 +7,9 @@
       <p class="mb-0"><span class="fw-bold"><%= tweet_presenter.user.display_name %></span>@<span class="text-secondary"><%= tweet_presenter.user.username %> · <%= tweet_presenter.created_at %></span></p>
       <p><%= tweet_presenter.body %></p>
       <div class="d-flex justify-content-between">
-        <%= link_to "#", data: { ignore_click: true }, class: "text-decoration-none text-black action-link views" do %>
+        <%= link_to tweet_path(tweet_presenter.tweet), data: { ignore_click: true }, class: "text-decoration-none text-black action-link views" do %>
           <%= image_tag 'view.png', width: 20 %>
-          <span class="ms-1">Views</span>
+          <span class="ms-1"><%= tweet_presenter.view_text %></span>
         <% end %>
         <%# When a request originates from a turbo_frame, turbo expects the response contains updated content. We have to add "turbo_page_requires_reload" to tweets/show.html.erb %>
         <%= link_to tweet_path(tweet_presenter.tweet), data: { ignore_click: true }, class: "text-decoration-none text-black action-link replies" do %>

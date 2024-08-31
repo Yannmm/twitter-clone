@@ -8,7 +8,7 @@ class TweetPresenter
 
   attr_reader :tweet
 
-  delegate :likes_count, :retweets_count, :user, :body, :likes, to: :tweet
+  delegate :likes_count, :retweets_count, :views_count, :user, :body, :likes, to: :tweet
 
   delegate :display_name, :username, to: :user
 
@@ -150,5 +150,9 @@ class TweetPresenter
     else
       'Retweet'
     end
+  end
+
+  def view_text
+    tweet.views_count.to_s
   end
 end
