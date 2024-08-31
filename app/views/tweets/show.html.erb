@@ -19,11 +19,7 @@
         ·
         <%= @tweet_presenter.tweet.created_at.strftime("%b %e, %Y") %>
       </p>
-      <div id="turbo-show-stats">
-        <%= turbo_frame_tag dom_id(@tweet_presenter.tweet) do %>
-          <%= render "tweets/stats", tweet_presenter: @tweet_presenter %>
-        <% end %>
-      </div>
+      <%= render "tweets/stats", tweet_presenter: @tweet_presenter %>
     </div>
   </div>
 </div>
