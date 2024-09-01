@@ -8,12 +8,12 @@ gem 'bootsnap', require: false
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem 'cssbundling-rails'
 
+gem 'delayed_job_active_record'
+
 gem 'devise', '~> 4.9'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
-
-gem 'impressionist'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'

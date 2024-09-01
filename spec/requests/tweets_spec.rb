@@ -5,20 +5,19 @@ RSpec.describe 'Tweets', type: :request do
     let(:user) { create(:user) }
     let(:tweet) { create(:tweet) }
 
-    before { sign_in user }
+    before do
+      sign_in user
+      allow(LogViewOfTweetJob).to receive(:perform_later)
+    end
 
     it 'succeeds' do
       get tweet_path(tweet)
       expect(response).to have_http_status(:success)
     end
 
-    it 'increments the view count if the tweet has not been viewed' do
-      expect { get tweet_path(tweet) }.to change { View.count }.by(1)
-    end
-
-    it 'does not increment the view count if the tweet has been viewed' do
-      create(:view, user:, tweet:)
-      expect { get tweet_path(tweet) }.not_to(change { View.count })
+    it 'queues up LogViewOfTweetJob' do
+      get tweet_path(tweet)
+      expect(LogViewOfTweetJob).to have_received(:perform_later).with(user:, tweet:)
     end
   end
 

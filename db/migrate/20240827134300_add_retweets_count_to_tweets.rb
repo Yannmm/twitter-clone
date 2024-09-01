@@ -3,7 +3,7 @@ class AddRetweetsCountToTweets < ActiveRecord::Migration[7.1]
     add_column :tweets, :retweets_count, :integer, null: false, default: 0
 
     Tweet.all.find_each do |tweet|
-      Tweet.update_counters tweet.id, retweets_count: tweet.retweets.count
+      Tweet.reset_counters tweet.id, :retweets_count
     end
   end
 
