@@ -11,6 +11,8 @@ RSpec.describe Tweet, type: :model do
   it { should have_many(:views).dependent(:destroy) }
   it { should have_many(:viewing_users).through(:views).source(:user) }
   it { should belong_to(:user) }
+  it { should belong_to(:parent).with_foreign_key(:parent_id).inverse_of(:replies).class_name('Tweet').optional }
+  it { should have_many(:replies).with_foreign_key(:parent_id).class_name('Tweet') }
   it { should validate_presence_of(:body) }
   it { should validate_length_of(:body).is_at_most(280) }
 end
