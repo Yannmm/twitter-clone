@@ -1,6 +1,13 @@
-<%= form_with model: Tweet.new, url: tweets_path, local: true, data: { controller: "tweet-form" } do |f| %>
-  <%= f.text_area :body, class: "form-control w-100 tweet-input", placeholder: "What's happening?", data: { tweet_form_target: "textArea" } %>
-  <div class="d-flex justify-content-end">
-    <%= f.submit 'Tweet', class: 'btn-twitter rounded-pill border-0 px-4 py-2 mt-4' %>
+<div class="tweet hover d-flex py-3 px-3">
+  <div class="flex-shrink-0">
+    <%= image_tag current_user.avatar.attached? ? current_user.avatar : 'anonymous.png' , size: "48", class: "rounded-circle" %>
   </div>
-<% end %>
+  <div class="flex-grow-1 ms-3">
+    <%= form_with model: Tweet.new, url: form_submit_path, local: true, data: { controller: "tweet-form" } do |f| %>
+      <%= f.text_area :body, class: "form-control w-100 tweet-input", placeholder: "What's happening?", data: { tweet_form_target: "textArea" } %>
+      <div class="d-flex justify-content-end">
+        <%= f.submit button_label, class: 'btn-twitter rounded-pill border-0 px-4 py-2 mt-4' %>
+      </div>
+    <% end %>
+  </div>
+</div>

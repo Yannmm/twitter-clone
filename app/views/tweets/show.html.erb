@@ -22,6 +22,9 @@
       <%= render "tweets/stats", tweet_presenter: @tweet_presenter %>
     </div>
   </div>
+  <div class="mb-4">
+    <%= render 'shared/tweet_form', button_label: "Reply", form_submit_path: tweet_replies_path(@tweet_presenter.tweet) %>
+  </div>
 </div>
 <div class="col">
   123

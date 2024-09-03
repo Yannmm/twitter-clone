@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :likes, only: %i[create destroy]
     resources :bookmarks, only: %i[create destroy]
     resources :retweets, only: %i[create destroy]
+    resources :replies, only: %i[create]
   end
 
   resources :usernames, only: %i[edit update]

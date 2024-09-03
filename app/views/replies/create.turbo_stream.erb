@@ -1,0 +1,10 @@
+<% 
+  partial_name = if previous_controller_name == "tweets" && previous_action_name == "show"
+    'tweets/stats'
+  else
+    'tweets/tweet'
+  end
+%>
+<%= turbo_stream.replace dom_id(@tweet_presenter.tweet) do %>
+  <%= render partial: "tweets/tweet", locals: { tweet_presenter: @tweet_presenter } %>
+<% end %>

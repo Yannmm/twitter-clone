@@ -3,7 +3,7 @@
     <%= link_to 'Home', dashboard_path, class: 'fs-4 text-decoration-none text-black' %>
   </div>
   <div class="mb-4">
-    <%= render 'shared/tweet_form' %>
+    <%= render 'shared/tweet_form', button_label: "Tweet", form_submit_path: tweets_path %>
   </div>
   <div id="tweets">
     <%= render partial: "tweets/tweet", collection: @tweet_presenters,  as: :tweet_presenter %>
