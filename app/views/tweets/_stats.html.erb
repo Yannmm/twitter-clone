@@ -14,14 +14,14 @@
         <%= image_tag 'reply.png', width: 25 %>
       <% end %>
       <% unless tweet_presenter.self_tweet? %>
-        <%= link_to tweet_presenter.retweet_path, data: { turbo_method: tweet_presenter.retweet_method }, class: "text-decoration-none text-black action-link likes" do %>
+        <%= link_to tweet_presenter.retweet_path(source: 'stats'), data: { turbo_method: tweet_presenter.retweet_method }, class: "text-decoration-none text-black action-link likes" do %>
           <%= image_tag tweet_presenter.retweet_image, width: 25 %>
         <% end %>
       <% end %>
-      <%= link_to tweet_presenter.like_path, data: { turbo_method: tweet_presenter.like_method }, class: "text-decoration-none text-black action-link likes" do %>
+      <%= link_to tweet_presenter.like_path(source: 'stats'), data: { turbo_method: tweet_presenter.like_method }, class: "text-decoration-none text-black action-link likes" do %>
         <%= image_tag tweet_presenter.like_image, width: 25 %>
       <% end %>
-      <%= link_to tweet_presenter.bookmark_path, data: { turbo_method: tweet_presenter.bookmark_method, ignore_click: true }, class: "text-decoration-none text-black action-link likes" do %>
+      <%= link_to tweet_presenter.bookmark_path(source: 'stats'), data: { turbo_method: tweet_presenter.bookmark_method, ignore_click: true }, class: "text-decoration-none text-black action-link likes" do %>
         <%= image_tag tweet_presenter.bookmark_image, width: 25 %>
       <% end %>
     </div>

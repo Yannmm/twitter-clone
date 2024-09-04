@@ -1,7 +1,8 @@
 <% 
-  partial_name = if previous_controller_name == "tweets" && previous_action_name == "show"
+  partial_name = case @source
+  when "stats"
     'tweets/stats'
-  else
+  else 
     'tweets/tweet'
   end
 %>

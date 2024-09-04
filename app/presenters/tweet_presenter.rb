@@ -36,11 +36,11 @@ class TweetPresenter
     @like ||= tweet.likes.find_by(user: @current_user)
   end
 
-  def like_path
+  def like_path(source: nil)
     if liked?
-      tweet_like_path(tweet, like)
+      tweet_like_path(tweet, like, source:)
     else
-      tweet_likes_path(tweet)
+      tweet_likes_path(tweet, source:)
     end
   end
 
@@ -76,11 +76,11 @@ class TweetPresenter
     @bookmark ||= tweet.bookmarks.find_by(user: @current_user)
   end
 
-  def bookmark_path
+  def bookmark_path(source: nil)
     if bookmarked?
-      tweet_bookmark_path(tweet, bookmark)
+      tweet_bookmark_path(tweet, bookmark, source:)
     else
-      tweet_bookmarks_path(tweet)
+      tweet_bookmarks_path(tweet, source:)
     end
   end
 
@@ -120,11 +120,11 @@ class TweetPresenter
     @retweet ||= tweet.retweets.find_by(user: @current_user)
   end
 
-  def retweet_path
+  def retweet_path(source: nil)
     if retweeted?
-      tweet_retweet_path(tweet, retweet)
+      tweet_retweet_path(tweet, retweet, source:)
     else
-      tweet_retweets_path(tweet)
+      tweet_retweets_path(tweet, source:)
     end
   end
 

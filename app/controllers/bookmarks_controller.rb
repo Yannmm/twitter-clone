@@ -3,6 +3,7 @@ class BookmarksController < ApplicationController
 
   def create
     bookmark = current_user.bookmarks.build(tweet_id: params[:tweet_id])
+    @source = params[:source]
     if bookmark.save
       @tweet_presenter = TweetPresenter.new(bookmark.tweet, current_user)
       respond_to do |format|
@@ -18,6 +19,7 @@ class BookmarksController < ApplicationController
 
   def destroy
     bookmark = current_user.bookmarks.find(params[:id])
+    @source = params[:source]
     if bookmark.destroy
       @tweet_presenter = TweetPresenter.new(bookmark.tweet, current_user)
       respond_to do |format|

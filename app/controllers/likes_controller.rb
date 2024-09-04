@@ -3,7 +3,9 @@ class LikesController < ApplicationController
 
   def create
     like = current_user.likes.build(tweet_id: params[:tweet_id])
+    puts "🐶 -> #{params}"
     if like.save
+      @source = params[:source]
       @tweet_presenter = TweetPresenter.new(like.tweet, current_user)
       respond_to do |format|
         format.html do
@@ -19,6 +21,7 @@ class LikesController < ApplicationController
   def destroy
     like = current_user.likes.find(params[:id])
     if like.destroy
+      @source = params[:source]
       @tweet_presenter = TweetPresenter.new(like.tweet, current_user)
       respond_to do |format|
         format.html do
