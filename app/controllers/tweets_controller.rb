@@ -22,6 +22,17 @@ class TweetsController < ApplicationController
   def show
     tweet = Tweet.find(params[:id])
     @tweet_presenter = TweetPresenter.new(tweet, current_user)
+    @reply_presenters = tweet.replies.includes(:user,
+                                               :likes,
+                                               :liking_users,
+                                               :bookmarks,
+                                               :bookmarking_users,
+                                               :retweets,
+                                               :retweeting_users)
+                             .order(created_at: :desc)
+                             .map do |t|
+      TweetPresenter.new(t, t.user)
+    end
 
     LogViewOfTweetJob.perform_later(tweet:, user: current_user)
   end
