@@ -1,3 +1,6 @@
 <%= turbo_stream.prepend "replies" do %>
   <%= render partial: "tweets/tweet", locals: { tweet_presenter: @tweet_presenter } %>
 <% end %>
+<%= turbo_stream.replace dom_id(@parent_tweet_presenter.tweet) do %>
+  <%= render partial: "tweets/stats", locals: { tweet_presenter: @parent_tweet_presenter } %>
+<% end %>

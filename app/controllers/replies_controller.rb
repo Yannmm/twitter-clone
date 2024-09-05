@@ -5,6 +5,7 @@ class RepliesController < ApplicationController
     reply = current_user.tweets.build(reply_params.merge({ parent_id: params[:tweet_id] }))
     if reply.save
       @tweet_presenter = TweetPresenter.new(reply, current_user)
+      @parent_tweet_presenter = TweetPresenter.new(reply.parent, current_user)
       respond_to do |format|
         format.html do
           redirect_to tweet_path(params[:tweet_id]), notice: 'Reply successfully'
