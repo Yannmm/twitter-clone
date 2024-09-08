@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :replies, only: %i[create]
   end
 
-  resource :profile, only: :show
+  resource :profile, only: %i[show update]
   resolve('Profile') { [:profile] }
 
   resources :usernames, only: %i[edit update]
