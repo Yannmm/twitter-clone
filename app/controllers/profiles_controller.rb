@@ -6,7 +6,13 @@ class ProfilesController < ApplicationController
 
   def update
     if current_user.update(user_params)
-      redirect_to profile_path, notice: 'Profile updated successfully.'
+      respond_to do |format|
+        format.html do
+          redirect_to profile_path, notice: 'Profile updated successfully.'
+        end
+        format.turbo_stream
+      end
+
     else
       render :show, status: :unprocessable_entity
     end
