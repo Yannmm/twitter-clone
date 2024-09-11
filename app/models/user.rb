@@ -24,19 +24,11 @@ class User < ApplicationRecord
 
   has_many :viewed_tweets, through: :views, source: :tweet
 
-  # 1. Rename followerships
-  # 2. what's reverse_followerships?
-  has_many :followerships, dependent: :destroy
+  has_many :who_i_follow, foreign_key: :follower_id, class_name: 'Followership'
+  has_many :followees, through: :who_i_follow, dependent: :destroy
 
-  has_many :followees, through: :followerships, source: :following_user
-
-  has_many :reverse_followerships,
-           foreign_key: :following_user_id,
-           class_name: 'Followership'
-
-  has_many :followers,
-           through: :reverse_followerships,
-           source: :user
+  has_many :who_follow_me, foreign_key: :followee_id, class_name: 'Followership'
+  has_many :followers, through: :who_follow_me, dependent: :destroy
 
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
 

@@ -68,13 +68,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_10_131347) do
   end
 
   create_table "followerships", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "following_user_id", null: false
+    t.bigint "follower_id", null: false
+    t.bigint "followee_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["following_user_id"], name: "index_followerships_on_following_user_id"
-    t.index ["user_id", "following_user_id"], name: "index_followerships_on_user_id_and_following_user_id", unique: true
-    t.index ["user_id"], name: "index_followerships_on_user_id"
+    t.index ["followee_id"], name: "index_followerships_on_followee_id"
+    t.index ["follower_id", "followee_id"], name: "index_followerships_on_follower_id_and_followee_id", unique: true
+    t.index ["follower_id"], name: "index_followerships_on_follower_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -143,8 +143,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_10_131347) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookmarks", "tweets"
   add_foreign_key "bookmarks", "users"
-  add_foreign_key "followerships", "users"
-  add_foreign_key "followerships", "users", column: "following_user_id"
+  add_foreign_key "followerships", "users", column: "followee_id"
+  add_foreign_key "followerships", "users", column: "follower_id"
   add_foreign_key "likes", "tweets"
   add_foreign_key "likes", "users"
   add_foreign_key "retweets", "tweets"

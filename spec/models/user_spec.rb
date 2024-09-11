@@ -11,12 +11,13 @@ RSpec.describe User, type: :model do
   it { should have_many(:retweeted_tweets).through(:retweets).source(:tweet) }
   it { should have_many(:views) }
   it { should have_many(:viewed_tweets).through(:views).source(:tweet) }
-
-  it { should have_many(:reverse_followerships).with_foreign_key(:following_user_id).class_name('Followership') }
-  it { should have_many(:followers).through(:reverse_followerships).source(:user) }
   it { should have_many(:retweeted_tweets).through(:retweets).source(:tweet) }
 
-  it { should have_many(:followerships).dependent(:destroy) }
+  it { should have_many(:who_i_follow).with_foreign_key(:follower_id).class_name('Followership') }
+  it { should have_many(:followees).through(:who_i_follow).dependent(:destroy) }
+
+  it { should have_many(:who_follow_me).with_foreign_key(:followee_id).class_name('Followership') }
+  it { should have_many(:followers).through(:who_follow_me).dependent(:destroy) }
 
   describe '#set_display_name' do
     context 'when display_name is set.' do
