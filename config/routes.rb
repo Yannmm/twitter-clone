@@ -22,4 +22,8 @@ Rails.application.routes.draw do
   resolve('Profile') { [:profile] }
 
   resources :usernames, only: %i[edit update]
+
+  resources :users, only: :show do
+    resources :followerships, only: %i[create destroy]
+  end
 end

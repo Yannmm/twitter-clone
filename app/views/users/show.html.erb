@@ -4,22 +4,22 @@
     <div class="mb-5">
       <%= link_to root_path, class: "fs-4 text-decoration-none text-black fw-semibold" do %>
         <%= image_tag "back.png", size: 30, class: "me-4" %>
-        <span style="position: relative; top:2px;"><%= current_user.username %></span>
-        <span class="text-muted fs-6" style="position: relative; top:2px;"><%= current_user.tweets.size %> Tweets</span>
+        <span style="position: relative; top:2px;"><%= @user.username %></span>
+        <span class="text-muted fs-6" style="position: relative; top:2px;"><%= @user.tweets.size %> Tweets</span>
       <% end %>
     </div>
     <div class="d-flex justify-content-between align-items-center mb-5">
       <div>
-        <%= image_tag current_user.avatar.attached? ? current_user.avatar : 'anonymous.png' , size: "80", class: "rounded-circle" %>
+        <%= image_tag @user.avatar.attached? ? @user.avatar : 'anonymous.png' , size: "80", class: "rounded-circle" %>
       </div>
       <div>
-        <%= link_to "Edit profile", "#", data: {'bs-toggle': 'modal', 'bs-target': '#profile-edit-modal'}, class: "btn btn-twitter-outline rounded-pill" %>
+        <%= link_to "Follow", "#", class: "btn btn-twitter-outline rounded-pill" %>
       </div>
     </div>
     <div>
-      <p class="fs-3 fw-semibold mb-0"><%= current_user.username %></p>
-      <p class="text-muted">@<%= current_user.display_name %></p>
-      <%= render 'profile_detail', user: current_user %>
+      <p class="fs-3 fw-semibold mb-0"><%= @user.username %></p>
+      <p class="text-muted">@<%= @user.display_name %></p>
+      <%= render 'profiles/profile_detail', user: @user %>
     </div>
   </div>
 </div>
