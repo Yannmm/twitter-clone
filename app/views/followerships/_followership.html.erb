@@ -1,0 +1,9 @@
+<%= turbo_frame_tag 'followership' do %>
+  <div>
+    <% if current_user.followees.include?(user) %>
+      <%= button_to "Unfollow", user_followership_path(user, followership), class: "btn btn-twitter-outline rounded-pill", method: :delete %>
+    <% else %>
+      <%= button_to "Follow", user_followerships_path(user), class: "btn btn-twitter-outline rounded-pill" %>
+    <% end %>
+  </div>
+<% end %>
