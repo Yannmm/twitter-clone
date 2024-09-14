@@ -28,7 +28,7 @@ class ProfilesController < ApplicationController
       :password,
       :bio,
       :location,
-      :url
+      :website
     )
     result.delete(:password) unless result[:password].present?
     result

@@ -3,31 +3,34 @@ class FollowershipsController < ApplicationController
   before_action :user, only: %i[create destroy]
 
   def create
-    @followership = current_user.who_i_follow.build(followee_id: params[:user_id])
+    @followership = @user.who_follow_me.build(follower: current_user)
+
     if @followership.save
+      @user.reload
       respond_to do |format|
         format.html do
-          redirect_to user_path(params[:user_id]), notice: 'User followed successfully.'
+          redirect_to user_path(@user), notice: 'User followed successfully.'
         end
         format.turbo_stream
       end
     else
-      redirect_to user_path(params[:user_id]), alert: 'Failed to follow user.'
+      redirect_to user_path(@user), alert: 'Failed to follow user.'
     end
   end
 
   def destroy
-    @followership = Followership.find(params[:id])
+    @followership = @user.who_follow_me.find(params[:id])
 
     if @followership.destroy
+      @user.reload
       respond_to do |format|
         format.html do
-          redirect_to user_path(params[:user_id]), notice: 'User unfollowed successfully.'
+          redirect_to user_path(@user), notice: 'User unfollowed successfully.'
         end
         format.turbo_stream
       end
     else
-      redirect_to user_path(params[:user_id]), alert: 'Failed to unfollow user.'
+      redirect_to user_path(@user), alert: 'Failed to unfollow user.'
     end
   end
 

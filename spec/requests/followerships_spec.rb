@@ -13,15 +13,15 @@ RSpec.describe 'Followerships', type: :request do
       end.to change { Followership.count }.by(1)
       expect(response).to redirect_to(user_path(user2))
     end
+  end
 
-    describe 'DELETE /destroy' do
-      it 'deletes an existing followership' do
-        followership = create(:followership, follower: user2, followee: user1)
-        expect do
-          delete user_followership_path(user2, followership)
-        end.to change { Followership.count }.by(-1)
-        expect(response).to redirect_to(user_path(user2))
-      end
+  describe 'DELETE /destroy' do
+    it 'deletes an existing followership' do
+      followership = create(:followership, follower: user1, followee: user2)
+      expect do
+        delete user_followership_path(user2, followership)
+      end.to change { Followership.count }.by(-1)
+      expect(response).to redirect_to(user_path(user2))
     end
   end
 end
