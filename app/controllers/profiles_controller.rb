@@ -2,10 +2,12 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
 
   def show
+    @user = current_user
   end
 
   def update
-    if current_user.update(user_params)
+    @user = current_user
+    if @user.update(user_params)
       respond_to do |format|
         format.html do
           redirect_to profile_path, notice: 'Profile updated successfully.'

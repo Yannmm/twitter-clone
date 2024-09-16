@@ -4,70 +4,78 @@
     <div class="mb-5">
       <%= link_to root_path, class: "fs-4 text-decoration-none text-black fw-semibold" do %>
         <%= image_tag "back.png", size: 30, class: "me-4" %>
-        <span style="position: relative; top:2px;"><%= current_user.username %></span>
-        <span class="text-muted fs-6" style="position: relative; top:2px;"><%= current_user.tweets.size %> Tweets</span>
+        <span style="position: relative; top:2px;"><%= @user.username %></span>
+        <span class="text-muted fs-6" style="position: relative; top:2px;"><%= @user.tweets.size %> Tweets</span>
       <% end %>
     </div>
     <div class="d-flex justify-content-between align-items-center mb-5">
       <div>
-        <%= image_tag current_user.avatar.attached? ? current_user.avatar : 'anonymous.png' , size: "80", class: "rounded-circle" %>
+        <%= image_tag @user.avatar.attached? ? @user.avatar : 'anonymous.png' , size: "80", class: "rounded-circle" %>
       </div>
-      <div>
-        <%= link_to "Edit profile", "#", data: {'bs-toggle': 'modal', 'bs-target': '#profile-edit-modal'}, class: "btn btn-twitter-outline rounded-pill" %>
-      </div>
+      <% if controller_name == "profiles" %>
+        <div>
+          <%= link_to "Edit profile", "#", data: {'bs-toggle': 'modal', 'bs-target': '#profile-edit-modal'}, class: "btn btn-twitter-outline rounded-pill" %>
+        </div>
+      <% else %>
+        <% if current_user != @user %>
+          <%= render 'followerships/followership', user: @user, followership: @followership %>
+        <% end %>
+      <% end %>
     </div>
     <div>
-      <p class="fs-3 fw-semibold mb-0"><%= current_user.username %></p>
-      <p class="text-muted">@<%= current_user.display_name %></p>
-      <%= render 'profile_detail', user: current_user %>
+      <p class="fs-3 fw-semibold mb-0"><%= @user.username %></p>
+      <p class="text-muted">@<%= @user.display_name %></p>
+      <%= render 'profiles/profile_detail', user: current_user %>
     </div>
   </div>
 </div>
 <div class="col">
   123
 </div>
-<!-- Modal -->
-<div class="modal fade" id="profile-edit-modal" data-bs-backdrop="true" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header border-bottom-0">
-        <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <%= form_with model: current_user, url: profile_path, class: 'row g-3' do |f| %>
-          <div class="col-md-12">
-            <%= f.label :username, class: "form-label"  %>
-            <%= f.text_field :username, class: "form-control" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.label :display_name, class: "form-label"  %>
-            <%= f.text_field :display_name, class: "form-control" %>
-          </div>
-          <div class="col-12">
-            <%= f.label :password, class: "form-label"  %>
-            <%= f.password_field :password, class: "form-control" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.label :email, class: "form-label"  %>
-            <%= f.text_field :email, class: "form-control" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.label :bio, class: "form-label"  %>
-            <%= f.text_area :bio, class: "form-control" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.label :location, class: "form-label"  %>
-            <%= f.text_field :location, class: "form-control" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.label :url, class: "form-label"  %>
-            <%= f.text_field :url, class: "form-control" %>
-          </div>
-          <div class="col-12">
-            <%= f.submit 'Update profile', class: "btn btn-twitter rounded-pill" %>
-          </div>
-        <% end %>
+<% if controller_name == "profiles" %>
+  <!-- Modal -->
+  <div class="modal fade" id="profile-edit-modal" data-bs-backdrop="true" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0">
+          <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form_with model: current_user, url: profile_path, class: 'row g-3' do |f| %>
+            <div class="col-md-12">
+              <%= f.label :username, class: "form-label"  %>
+              <%= f.text_field :username, class: "form-control" %>
+            </div>
+            <div class="col-md-12">
+              <%= f.label :display_name, class: "form-label"  %>
+              <%= f.text_field :display_name, class: "form-control" %>
+            </div>
+            <div class="col-12">
+              <%= f.label :password, class: "form-label"  %>
+              <%= f.password_field :password, class: "form-control" %>
+            </div>
+            <div class="col-md-12">
+              <%= f.label :email, class: "form-label"  %>
+              <%= f.text_field :email, class: "form-control" %>
+            </div>
+            <div class="col-md-12">
+              <%= f.label :bio, class: "form-label"  %>
+              <%= f.text_area :bio, class: "form-control" %>
+            </div>
+            <div class="col-md-12">
+              <%= f.label :location, class: "form-label"  %>
+              <%= f.text_field :location, class: "form-control" %>
+            </div>
+            <div class="col-md-12">
+              <%= f.label :url, class: "form-label"  %>
+              <%= f.text_field :url, class: "form-control" %>
+            </div>
+            <div class="col-12">
+              <%= f.submit 'Update profile', class: "btn btn-twitter rounded-pill" %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
