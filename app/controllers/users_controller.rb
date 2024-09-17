@@ -7,6 +7,10 @@ class UsersController < ApplicationController
 
     @followership = current_user.who_i_follow.find_by(followee_id: @user.id)
 
+    @tweet_presenters = @user.tweets.map do |tweet|
+      TweetPresenter.new(tweet, current_user)
+    end
+
     render 'profiles/show'
   end
 end

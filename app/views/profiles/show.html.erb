@@ -25,7 +25,10 @@
     <div>
       <p class="fs-3 fw-semibold mb-0"><%= @user.username %></p>
       <p class="text-muted">@<%= @user.display_name %></p>
-      <%= render 'profiles/profile_detail', user: current_user %>
+      <%= render 'profiles/profile_detail', user: @user %>
+      <div id="tweets">
+        <%= render partial: "tweets/tweet", collection: @tweet_presenters,  as: :tweet_presenter %>
+      </div>
     </div>
   </div>
 </div>
@@ -41,7 +44,7 @@
           <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <%= form_with model: current_user, url: profile_path, class: 'row g-3' do |f| %>
+          <%= form_with model: @user, url: profile_path, class: 'row g-3' do |f| %>
             <div class="col-md-12">
               <%= f.label :username, class: "form-label"  %>
               <%= f.text_field :username, class: "form-control" %>
