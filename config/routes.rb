@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resources :replies, only: %i[create]
   end
 
+  resources :bookmarks, only: %i[index]
+
   resource :profile, only: %i[show update]
   resolve('Profile') { [:profile] }
 
