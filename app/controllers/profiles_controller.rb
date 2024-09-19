@@ -1,15 +1,11 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_user, only: %i[show update]
 
   def show
-    @user = current_user
-    @tweet_presenters = @user.tweets.map do |tweet|
-      TweetPresenter.new(tweet, current_user)
-    end
   end
 
   def update
-    @user = current_user
     if @user.update(user_params)
       respond_to do |format|
         format.html do
@@ -25,6 +21,13 @@ class ProfilesController < ApplicationController
 
   private
 
+  def set_user
+    @user = current_user
+    @tweet_presenters = @user.tweets.map do |tweet|
+      TweetPresenter.new(tweet, current_user)
+    end
+  end
+
   def user_params
     result = params.require(:user).permit(
       :username,
@@ -33,7 +36,8 @@ class ProfilesController < ApplicationController
       :password,
       :bio,
       :location,
-      :website
+      :website,
+      :avatar
     )
     result.delete(:password) unless result[:password].present?
     result

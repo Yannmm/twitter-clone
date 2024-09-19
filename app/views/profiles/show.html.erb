@@ -9,7 +9,7 @@
       <% end %>
     </div>
     <div class="d-flex justify-content-between align-items-center mb-5">
-      <div>
+      <div id='avatar'>
         <%= image_tag @user.avatar.attached? ? @user.avatar : 'anonymous.png' , size: "80", class: "rounded-circle" %>
       </div>
       <% if controller_name == "profiles" %>
@@ -45,6 +45,10 @@
         </div>
         <div class="modal-body">
           <%= form_with model: @user, url: profile_path, class: 'row g-3' do |f| %>
+            <div class="input-group col-md-12">
+              <%= f.label :avatar, class: "input-group-text" %>
+              <%= f.file_field :avatar, class: "form-control" %>
+            </div>
             <div class="col-md-12">
               <%= f.label :username, class: "form-label"  %>
               <%= f.text_field :username, class: "form-control" %>
