@@ -27,13 +27,19 @@
         prepare_local_data = pkgs.writeScriptBin "prepare_local_data" ''
           rake db:create
           rake db:migrate
-          rails jobs:work
+          rails jobs:work &
+        '';
+
+        kill_services = pkgs.writeScriptBin "kill_services" ''
+          # kill psql
+          kill -9 $(lsof -i :$PGPORT -t)
         '';
       in
       {
         devShells.default = with pkgs; mkShell {
           buildInputs = [
             ruby
+            redis
             postgresql
             restart_db
             prepare_local_data
@@ -43,10 +49,9 @@
             mkdir -p $PWD/tmp/data
             export PGDATA=$PWD/tmp/data
             export PGHOST=$PWD/tmp/data
+            export PGPORT=5433
 
             initdb -D $PWD/tmp/data
-
-            restart_db
 
             export GEM_HOME=$PWD/tmp/gems
 
@@ -54,8 +59,6 @@
             ruby --version
 
             bundle install
-
-            prepare_local_data
           '';
         };
       });
