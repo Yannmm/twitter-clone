@@ -12,5 +12,13 @@ aside.dashboard-sidebar {
         background-color: $gray-400; 
       }
     }
+
+    &.active {
+      font-weight: 700;
+      div {
+        background-color: $gray-200;
+      }
+    }
   }
 }
+

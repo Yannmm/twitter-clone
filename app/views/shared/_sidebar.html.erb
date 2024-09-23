@@ -4,7 +4,7 @@
       <%= image_tag 'logo.png', width: 40 %>
     </div>
   <% end %>
-  <%= link_to root_path, class: "d-flex align-items-center mb-3" do %>
+  <%= link_to root_path, class: "d-flex align-items-center mb-3 #{ sidebar_link_active?('dashboard') ? 'active' : '' }" do %>
     <div class="px-4 py-2 rounded-pill">
       <span class='me-4'><%= image_tag 'home.png', width: 32 %></span>
       <span>Home</span>
@@ -28,13 +28,13 @@
       <span>Messages</span>
     </div>
   <% end %>
-  <%= link_to bookmarks_path, class: "d-flex align-items-center mb-3" do %>
+  <%= link_to bookmarks_path, class: "d-flex align-items-center mb-3 #{ sidebar_link_active?('bookmarks') ? 'active' : '' }" do %>
     <div class="px-4 py-2 rounded-pill">
       <span class='me-4'><%= image_tag 'bookmark.png', width: 32 %></span>
       <span>Bookmarks</span>
     </div>
   <% end %>
-  <%= link_to profile_path, class: "d-flex align-items-center mb-3" do %>
+  <%= link_to profile_path, class: "d-flex align-items-center mb-3 #{ sidebar_link_active?('profiles') ? 'active' : '' }" do %>
     <div class="px-4 py-2 rounded-pill">
       <span class='me-4'><%= image_tag 'profile.png', width: 32 %></span>
       <span>Profile</span>
