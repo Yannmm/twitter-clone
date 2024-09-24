@@ -27,4 +27,6 @@ class Tweet < ApplicationRecord
              counter_cache: :replies_count # This is the counter cache column
 
   has_many :replies, foreign_key: :parent_id, class_name: 'Tweet'
+
+  has_and_belongs_to_many :hashtags
 end
