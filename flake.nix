@@ -1,7 +1,7 @@
 {
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/8b27c12";
     nixpkgs-ruby.url = "github:bobvanderlinden/nixpkgs-ruby";
   };
 
@@ -15,41 +15,26 @@
           })
         ];
         pkgs = import nixpkgs { inherit system overlays; };
-
-        restart_db = pkgs.writeScriptBin "restart_db" ''
-          if pgrep "postgres" >/dev/null; then
-            pg_ctl stop
-          fi
-
-          pg_ctl -D $PGDATA -o '-k $PGHOST' start
-        '';
-
-        prepare_local_data = pkgs.writeScriptBin "prepare_local_data" ''
-          rake db:create
-          rake db:migrate
-          rails jobs:work &
-        '';
-
-        kill_services = pkgs.writeScriptBin "kill_services" ''
-          # kill psql
-          kill -9 $(lsof -i :$PGPORT -t)
-        '';
+        # gems = pkgs.bundlerEnv {
+        #   name = "your-package";
+        #   ruby = pkgs.ruby;
+        #   gemdir = ./.;
+        # };
       in
       {
-        devShells.default = with pkgs; mkShell {
+        devShells.default = with pkgs; mkShellNoCC {
           buildInputs = [
+            # gems
             ruby
             redis
             postgresql
-            restart_db
-            prepare_local_data
+            nodejs_22
+            bundix
           ];
 
           shellHook = ''
             mkdir -p $PWD/tmp/data
             export PGDATA=$PWD/tmp/data
-            export PGHOST=$PWD/tmp/data
-            export PGPORT=5433
 
             initdb -D $PWD/tmp/data
 
