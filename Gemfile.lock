@@ -120,6 +120,7 @@ GEM
     ffi (1.17.0-x86-linux-gnu)
     ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
+    foreman (0.88.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
     htmlbeautifier (1.4.3)
@@ -342,6 +343,7 @@ DEPENDENCIES
   devise (~> 4.9)
   factory_bot_rails
   faker
+  foreman (~> 0.88.1)
   htmlbeautifier
   importmap-rails
   jbuilder
@@ -363,7 +365,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.3.0p0
+   ruby 3.3.1p55
 
 BUNDLED WITH
-   2.5.3
+   2.5.9
