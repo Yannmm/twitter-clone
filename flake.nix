@@ -26,7 +26,7 @@
       fu,
       ruby-nix,
       bundix,
-      bob-ruby,
+      bob-ruby
     }:
     with fu.lib;
     eachDefaultSystem (
@@ -82,10 +82,16 @@
                 bundleUpdate
               ]
               ++ (with pkgs; [
+                postgresql
                 yarn
                 rufo
                 # more packages here
               ]);
+
+            shellHook = ''
+              mkdir -p $PWD/tmp/database
+              export PGDATA=$PWD/tmp/database
+            '';
           };
         };
       }
