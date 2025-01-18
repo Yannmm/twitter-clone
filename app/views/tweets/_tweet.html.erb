@@ -1,36 +1,61 @@
 <%= turbo_frame_tag dom_id(tweet_presenter.tweet) do %>
-  <div class="tweet d-flex py-4 px-3 hover" data-controller="tweet-card" data-target-path=<%= tweet_path(tweet_presenter.tweet) %>>
+  <div class="tweet d-flex py-4 px-3 hover" data-controller="tweet-card"
+    data-target-path=<%=tweet_path(tweet_presenter.tweet) %>>
     <div class="flex-shrink-0">
-      <%= image_tag tweet_presenter.avatar, size: "48", class: "rounded-circle" %>
+      <%= image_tag tweet_presenter.avatar, size: "48" , class: "rounded-circle" %>
     </div>
     <div class="flex-grow-1 ms-3">
-      <p class="mb-0"><span class="fw-bold"><%= tweet_presenter.user.display_name %></span>@<span class="text-secondary"><%= tweet_presenter.user.username %> · <%= tweet_presenter.created_at %></span></p>
-      <p><%= tweet_presenter.body %></p>
+      <p class="mb-0"><span class="fw-bold">
+          <%= tweet_presenter.user.display_name %>
+        </span>@<span class="text-secondary">
+          <%= tweet_presenter.user.username %> · <%= tweet_presenter.created_at %>
+        </span></p>
+      <p>
+        <%= tweet_presenter.body %>
+      </p>
       <div class="d-flex justify-content-between">
-        <%= link_to tweet_path(tweet_presenter.tweet), data: { ignore_click: true }, class: "text-decoration-none text-black action-link views" do %>
-          <%= image_tag 'view.png', width: 20 %>
-          <span class="ms-1"><%= tweet_presenter.view_text %></span>
-        <% end %>
-        <%# When a request originates from a turbo_frame, turbo expects the response contains updated content. We have to add "turbo_page_requires_reload" to tweets/show.html.erb %>
-        <%= link_to tweet_path(tweet_presenter.tweet), data: { ignore_click: true }, class: "text-decoration-none text-black action-link replies" do %>
-          <%= image_tag 'reply.png', width: 20 %>
-          <span class="ms-1"><%= tweet_presenter.reply_text %></span>
-        <% end %>
-        <% unless tweet_presenter.self_tweet? %>
-          <%= link_to tweet_presenter.retweet_path, data: { turbo_method: tweet_presenter.retweet_method, ignore_click: true }, class: "text-decoration-none text-black action-link likes" do %>
-            <%= image_tag tweet_presenter.retweet_image, width: 20 %>
-            <span class="ms-1"><%= tweet_presenter.retweet_text %></span>
-          <% end %>
-        <% end %>
-        <%= link_to tweet_presenter.like_path, data: { turbo_method: tweet_presenter.like_method, ignore_click: true }, class: "text-decoration-none text-black action-link likes" do %>
-          <%= image_tag tweet_presenter.like_image, width: 20 %>
-          <span class="ms-1"><%= tweet_presenter.like_text %></span>
-        <% end %>
-        <%= link_to tweet_presenter.bookmark_path, data: { turbo_method: tweet_presenter.bookmark_method, ignore_click: true }, class: "text-decoration-none text-black action-link likes" do %>
-          <%= image_tag tweet_presenter.bookmark_image, width: 20 %>
-          <span class="ms-1"><%= tweet_presenter.bookmark_text %></span>
-        <% end %>
+        <%= link_to tweet_path(tweet_presenter.tweet), data: { ignore_click: true },
+          class: "text-decoration-none text-black action-link views" do %>
+          <%= image_tag 'view.png' , width: 20 %>
+            <span class="ms-1">
+              <%= tweet_presenter.view_text %>
+            </span>
+            <% end %>
+              <%# When a request originates from a turbo_frame, turbo expects the response contains updated content. We
+                have to add "turbo_page_requires_reload" to tweets/show.html.erb %>
+                <%= link_to tweet_path(tweet_presenter.tweet), data: { ignore_click: true },
+                  class: "text-decoration-none text-black action-link replies" do %>
+                  <%= image_tag 'reply.png' , width: 20 %>
+                    <span class="ms-1">
+                      <%= tweet_presenter.reply_text %>
+                    </span>
+                    <% end %>
+                      <% unless tweet_presenter.self_tweet? %>
+                        <%= link_to tweet_presenter.retweet_path, data: { turbo_method: tweet_presenter.retweet_method,
+                          ignore_click: true }, class: "text-decoration-none text-black action-link likes" do %>
+                          <%= image_tag tweet_presenter.retweet_image, width: 20 %>
+                            <span class="ms-1">
+                              <%= tweet_presenter.retweet_text %>
+                            </span>
+                            <% end %>
+                              <% end %>
+                                <%= link_to tweet_presenter.like_path, data: { turbo_method:
+                                  tweet_presenter.like_method, ignore_click: true },
+                                  class: "text-decoration-none text-black action-link likes" do %>
+                                  <%= image_tag tweet_presenter.like_image, width: 20 %>
+                                    <span class="ms-1">
+                                      <%= tweet_presenter.like_text %>
+                                    </span>
+                                    <% end %>
+                                      <%= link_to tweet_presenter.bookmark_path, data: { turbo_method:
+                                        tweet_presenter.bookmark_method, ignore_click: true },
+                                        class: "text-decoration-none text-black action-link likes" do %>
+                                        <%= image_tag tweet_presenter.bookmark_image, width: 20 %>
+                                          <span class="ms-1">
+                                            <%= tweet_presenter.bookmark_text %>
+                                          </span>
+                                          <% end %>
       </div>
     </div>
   </div>
-<% end %>
+  <% end %>

@@ -8,7 +8,7 @@ class TweetPresenter
 
   attr_reader :tweet
 
-  delegate :likes_count, :retweets_count, :views_count, :replies_count, :user, :body, :likes, to: :tweet
+  delegate :likes_count, :retweets_count, :views_count, :replies_count, :user, :likes, to: :tweet
 
   delegate :display_name, :username, to: :user
 
@@ -18,6 +18,18 @@ class TweetPresenter
     else
       time_ago_in_words(tweet.created_at)
     end
+  end
+
+  def body
+    text = tweet.body.split(" ").map do |word|
+      if word.start_with?("#")
+        "<a class=\"twitter-link text-decoration-none\" href=''>#{word}</a>"
+      else
+        word
+      end
+    end.join("")
+
+    "<p>#{text}</p>".html_safe
   end
 
   def avatar
