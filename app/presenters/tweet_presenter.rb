@@ -27,9 +27,9 @@ class TweetPresenter
       else
         word
       end
-    end.join("")
+    end.join(" ")
 
-    "<p>#{text}</p>".html_safe
+    text.html_safe
   end
 
   def avatar
