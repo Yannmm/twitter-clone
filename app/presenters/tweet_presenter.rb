@@ -21,13 +21,13 @@ class TweetPresenter
   end
 
   def body
-    text = tweet.body.split(" ").map do |word|
-      if word.start_with?("#")
+    text = tweet.body.split(' ').map do |word|
+      if word.start_with?('#')
         "<a class=\"twitter-link text-decoration-none\" href=''>#{word}</a>"
       else
         word
       end
-    end.join(" ")
+    end.join(' ')
 
     text.html_safe
   end

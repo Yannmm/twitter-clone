@@ -1,69 +1,90 @@
 <aside class="col dashboard-sidebar">
   <%= link_to root_path, class: "d-flex align-items-center mb-3" do %>
     <div class="px-4 py-4 rounded-circle">
-      <%= image_tag 'logo.png', width: 40 %>
+      <%= image_tag 'logo.png' , width: 40 %>
     </div>
   <% end %>
-  <%= link_to root_path, class: "d-flex align-items-center mb-3 #{ sidebar_link_active?('dashboard') ? 'active' : '' }" do %>
+  <%= link_to root_path,
+        class: "d-flex align-items-center mb-3 #{ sidebar_link_active?('dashboard') ? 'active' : '' }" do %>
     <div class="px-4 py-2 rounded-pill">
-      <span class='me-4'><%= image_tag 'home.png', width: 32 %></span>
+      <span class='me-4'>
+        <%= image_tag 'home.png' , width: 32 %>
+      </span>
       <span>Home</span>
     </div>
   <% end %>
-  <%= link_to root_path, class: "d-flex align-items-center mb-3" do %>
+  <%= link_to hashtags_path, class: "d-flex align-items-center mb-3 #{ sidebar_link_active?('hashtags') ? 'active' : '' }" do %>
     <div class="px-4 py-2 rounded-pill">
-      <span class='me-4'><%= image_tag 'explore.png', width: 32 %></span>
+      <span class='me-4'>
+        <%= image_tag 'explore.png' , width: 32 %>
+      </span>
       <span>Explore</span>
     </div>
   <% end %>
   <%= link_to root_path, class: "d-flex align-items-center mb-3" do %>
     <div class="px-4 py-2 rounded-pill">
-      <span class='me-4'><%= image_tag 'notification.png', width: 32 %></span>
+      <span class='me-4'>
+        <%= image_tag 'notification.png' , width: 32 %>
+      </span>
       <span>Notificationss</span>
     </div>
   <% end %>
   <%= link_to root_path, class: "d-flex align-items-center mb-3" do %>
     <div class="px-4 py-2 rounded-pill">
-      <span class='me-4'><%= image_tag 'message.png', width: 32 %></span>
+      <span class='me-4'>
+        <%= image_tag 'message.png' , width: 32 %>
+      </span>
       <span>Messages</span>
     </div>
   <% end %>
-  <%= link_to bookmarks_path, class: "d-flex align-items-center mb-3 #{ sidebar_link_active?('bookmarks') ? 'active' : '' }" do %>
+  <%= link_to bookmarks_path,
+                        class: "d-flex align-items-center mb-3 #{ sidebar_link_active?('bookmarks') ? 'active' : '' }" do %>
     <div class="px-4 py-2 rounded-pill">
-      <span class='me-4'><%= image_tag 'bookmark.png', width: 32 %></span>
+      <span class='me-4'>
+        <%= image_tag 'bookmark.png' , width: 32 %>
+      </span>
       <span>Bookmarks</span>
     </div>
   <% end %>
-  <%= link_to profile_path, class: "d-flex align-items-center mb-3 #{ sidebar_link_active?('profiles') ? 'active' : '' }" do %>
+  <%= link_to profile_path,
+                            class: "d-flex align-items-center mb-3 #{ sidebar_link_active?('profiles') ? 'active' : '' }" do %>
     <div class="px-4 py-2 rounded-pill">
-      <span class='me-4'><%= image_tag 'profile.png', width: 32 %></span>
+      <span class='me-4'>
+        <%= image_tag 'profile.png' , width: 32 %>
+      </span>
       <span>Profile</span>
     </div>
   <% end %>
   <%= link_to root_path, class: "d-flex align-items-center mb-3" do %>
     <div class="px-4 py-2 rounded-pill">
-      <span class='me-4'><%= image_tag 'more.png', width: 32 %></span>
+      <span class='me-4'>
+        <%= image_tag 'more.png' , width: 32 %>
+      </span>
       <span>More</span>
     </div>
   <% end %>
   <div>
-    <%= link_to '#', class: "d-flex align-items-center mb-3 px-4 py-2" do %>
-      <button type="button" class="btn rounded-pill btn-lg w-100 btn-twitter" data-bs-toggle="modal" data-bs-target="#exampleModal">Tweet</button>
+    <%= link_to '#' , class: "d-flex align-items-center mb-3 px-4 py-2" do %>
+      <button type="button" class="btn rounded-pill btn-lg w-100 btn-twitter"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal">Tweet</button>
     <% end %>
   </div>
   <div class="d-flex align-items-center mb-3 px-4 py-2">
-    <%= link_to 'Sign out', destroy_user_session_path, class: "btn rounded-pill btn-lg w-100 btn-warning", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+    <%= link_to 'Sign out' , destroy_user_session_path,
+                                      class: "btn rounded-pill btn-lg w-100 btn-warning" , data: { turbo_method:
+                                      :delete, turbo_confirm: 'Are you sure?' } %>
   </div>
 </aside>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" data-bs-backdrop="true" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" data-bs-backdrop="true" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
         <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= render 'shared/tweet_form', button_label: "Tweet", form_submit_path: tweets_path %>
+        <%= render 'shared/tweet_form' , button_label: "Tweet" , form_submit_path: tweets_path %>
       </div>
     </div>
   </div>
